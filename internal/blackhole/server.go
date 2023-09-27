@@ -131,6 +131,10 @@ func (s *Server) buildProxyHandler(upstream string) error {
 			return
 		}
 
+		s.log.Info().
+			Stringer("client", w.RemoteAddr()).
+			Msgf("proxy: %s", req.Question[0].Name)
+
 		rsp.SetReply(req)
 		_ = w.WriteMsg(rsp)
 	})
